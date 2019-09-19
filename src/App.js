@@ -15,18 +15,32 @@ function App() {
   const [products] = useState(data);
   const [cart, setCart] = useState([]);
 
+  console.log("cart", cart);
+
   const addItem = item => {
     setCart([...cart, item]);
   };
 
+  const removeItem = removeKey => {
+    setCart(
+      cart.filter(function(item) {
+        return item.id !== removeKey;
+      })
+    );
+  };
+
+  //   const removeFromCart = item => {
+  //     setCart({ ...cart, item: undefined });
+  //   };
+
   return (
     <ProductContext.Provider value={{ products, addItem }}>
-      <CartContext.Provider value={cart}>
+      <CartContext.Provider value={{ cart, removeItem }}>
         <div className="App">
           <Navigation />
           {/* Routes */}
-          <Route exact path="/" component={Products} />} />
-          <Route path="/cart" component={ShoppingCart} />} />
+          <Route exact path="/" component={Products} />
+          <Route path="/cart" component={ShoppingCart} />
         </div>
       </CartContext.Provider>
     </ProductContext.Provider>
