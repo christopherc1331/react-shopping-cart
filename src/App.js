@@ -18,7 +18,7 @@ function App() {
   console.log("cart", cart);
 
   const addItem = item => {
-    setCart([...cart, item]);
+    setCart([...cart, { ...item, id: Date.now() }]);
   };
 
   const removeItem = removeKey => {
